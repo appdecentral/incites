@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import CoreSpotlight
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
@@ -29,7 +30,7 @@ struct ContentView: View {
                     EditButton()
                 }
                 ToolbarItem {
-                    Button(action: addItem) {
+                    Button(action: addIncite) {
                         Label("Add Item", systemImage: "plus")
                     }
                 }
@@ -37,11 +38,15 @@ struct ContentView: View {
         } detail: {
             Text("Select an item")
         }
+        .onContinueUserActivity(CSSearchableItemActionType, perform: handleSpotlight)
     }
 
-    private func addItem() {
+    private func addIncite() {
         withAnimation {
             let newItem = Incite()
+            let tag = Tag()
+            tag.textLabel = "Car"
+            newItem.tags.append(tag)
             modelContext.insert(newItem)
         }
     }
@@ -52,6 +57,14 @@ struct ContentView: View {
                 modelContext.delete(incites[index])
             }
         }
+    }
+    
+    func handleSpotlight(userActivity: NSUserActivity) {
+        guard let identifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String else {
+            return
+        }
+        
+        print("Item tapped: \(identifier)")
     }
 }
 
