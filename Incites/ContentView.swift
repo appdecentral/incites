@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  Insights
+//  Incites
 //
 //  Created by Drew McCormack on 03/10/2023.
 //
@@ -10,16 +10,16 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var insights: [Insight]
+    @Query private var incites: [Incite]
 
     var body: some View {
         NavigationSplitView {
             List {
-                ForEach(insights) { insight in
+                ForEach(incites) { incite in
                     NavigationLink {
-                        Text("Item at \(insight.creationDate, format: Date.FormatStyle(date: .numeric, time: .standard))")
+                        Text("Item at \(incite.creationDate, format: Date.FormatStyle(date: .numeric, time: .standard))")
                     } label: {
-                        Text(insight.creationDate, format: Date.FormatStyle(date: .numeric, time: .standard))
+                        Text(incite.creationDate, format: Date.FormatStyle(date: .numeric, time: .standard))
                     }
                 }
                 .onDelete(perform: deleteItems)
@@ -41,7 +41,7 @@ struct ContentView: View {
 
     private func addItem() {
         withAnimation {
-            let newItem = Insight()
+            let newItem = Incite()
             modelContext.insert(newItem)
         }
     }
@@ -49,7 +49,7 @@ struct ContentView: View {
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
-                modelContext.delete(insights[index])
+                modelContext.delete(incites[index])
             }
         }
     }
@@ -57,5 +57,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: Insight.self, inMemory: true)
+        .modelContainer(for: Incite.self, inMemory: true)
 }

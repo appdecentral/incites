@@ -1,6 +1,6 @@
 //
-//  Insight.swift
-//  Insights
+//  Incite.swift
+//  Incites
 //
 //  Created by Drew McCormack on 03/10/2023.
 //
@@ -18,7 +18,7 @@ enum Language: Codable {
     }
 }
 
-enum InsightColor: Codable {
+enum InciteColor: Codable {
     case red
     case green
     case blue
@@ -37,34 +37,38 @@ struct Fact: Codable {
 }
 
 @Model
-final class InsightImage {
+final class InciteImage {
     @Attribute(.externalStorage) let imageData: Data
-    let insight: Insight
-    init(imageData: Data, insight: Insight) {
+    @Attribute(.unique) let uuid: UUID
+    let incite: Incite
+    init(imageData: Data, incite: Incite) {
         self.imageData = imageData
-        self.insight = insight
+        self.incite = incite
+        self.uuid = UUID()
     }
 }
 
 @Model
 final class Tag {
     @Attribute(.spotlight) var textLabel: String
-    var color: InsightColor
+    var color: InciteColor
+    @Relationship(deleteRule: .nullify) var incites: [Incite]
     
     init() {
         self.textLabel = ""
         self.color = .blue
+        self.incites = []
     }
 }
 
 @Model
-final class Insight {
+final class Incite {
     let creationDate: Date
     @Attribute(.spotlight) var fact: Fact
     var prompt: Fact.Representation
     var response: Fact.Representation
-    @Relationship(deleteRule: .cascade) var images: [InsightImage]
-    var tags: [Tag]
+    @Relationship(deleteRule: .cascade, inverse: \InciteImage.incite) var images: [InciteImage]
+    @Relationship(deleteRule: .nullify, inverse: \Tag.incites) var tags: [Tag]
     
     init() {
         self.creationDate = Date.now
