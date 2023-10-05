@@ -37,43 +37,50 @@ struct Fact: Codable {
 }
 
 @Model
-final class Incite {
+final class Incite: Identifiable {
+    @Attribute(.unique) let id: UUID
     let creationDate: Date
     var fact: Fact
     var prompt: Fact.Representation
     var response: Fact.Representation
     @Relationship(deleteRule: .cascade) var images: [InciteImage]
-    @Relationship(deleteRule: .nullify, inverse: \Tag.incites) var tags: [Tag]
+    @Relationship(deleteRule: .nullify, minimumModelCount: 1, inverse: \Category.incites) var categories: [Category]
     
     init() {
+        self.id = UUID()
         self.creationDate = Date.now
         self.prompt = .text(.spanish)
         self.response = .text(.english)
         self.fact = Fact(text: "", language: .current)
         self.images = []
-        self.tags = []
+        self.categories = []
     }
 }
 
 @Model
-final class InciteImage {
+final class InciteImage: Identifiable {
+    @Attribute(.unique) let id: UUID
     @Attribute(.externalStorage) let imageData: Data
-    @Attribute(.unique) let uuid: UUID
     init(imageData: Data, incite: Incite) {
+        self.id = UUID()
         self.imageData = imageData
-        self.uuid = UUID()
     }
 }
 
 @Model
-final class Tag {
+final class Category: Identifiable {
+    @Attribute(.unique) let id: String
     @Attribute(.spotlight) var textLabel: String
+    var isBuiltIn: Bool
+    var isBuiltInForSorting: Int { isBuiltIn ? 1 : 0 }
     var color: InciteColor
     @Relationship(deleteRule: .nullify) var incites: [Incite]
     
-    init() {
+    init(id: String?) {
+        self.id = id != nil ? id! : UUID().uuidString
         self.textLabel = ""
         self.color = .blue
+        self.isBuiltIn = false
         self.incites = []
     }
 }

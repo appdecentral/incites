@@ -10,62 +10,24 @@ import SwiftData
 import CoreSpotlight
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var incites: [Incite]
-
+    @State var selectedInciteId: UUID?
+    @State var selectedCategory: Category?
+    @Query(sort: \Incite.creationDate, order: .forward) var incites: [Incite]
+    @Query(sort: [SortDescriptor(\Category.isBuiltInForSorting, order: .reverse), SortDescriptor(\Category.textLabel)]) 
+    var categories: [Category]
+    
     var body: some View {
         NavigationSplitView {
-            List {
-                ForEach(incites) { incite in
-                    NavigationLink {
-                        Text("Item at \(incite.creationDate, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(incite.creationDate, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addIncite) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
+            IncitesView(incites: incites, selectedInciteId: $selectedInciteId, selectedCategory: $selectedCategory)
         } detail: {
-            Text("Select an item")
-        }
-        .onContinueUserActivity(CSSearchableItemActionType, perform: handleSpotlight)
-    }
-
-    private func addIncite() {
-        withAnimation {
-            let newItem = Incite()
-            let tag = Tag()
-            tag.textLabel = "Car"
-            newItem.tags.append(tag)
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(incites[index])
+            if let selectedInciteId, let incite = incites.first(where: { $0.id == selectedInciteId }) {
+                EditInciteView(incite: incite)
+            } else {
+                Text("Select a Category")
             }
         }
     }
     
-    func handleSpotlight(userActivity: NSUserActivity) {
-        guard let identifier = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String else {
-            return
-        }
-        
-        print("Item tapped: \(identifier)")
-    }
 }
 
 #Preview {
