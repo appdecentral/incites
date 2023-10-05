@@ -71,8 +71,7 @@ final class InciteImage: Identifiable {
 final class Category: Identifiable {
     @Attribute(.unique) let id: String
     @Attribute(.spotlight) var textLabel: String
-    var isBuiltIn: Bool
-    var isBuiltInForSorting: Int { isBuiltIn ? 1 : 0 }
+    var sortPriority: Int
     var color: InciteColor
     @Relationship(deleteRule: .nullify) var incites: [Incite]
     
@@ -80,7 +79,7 @@ final class Category: Identifiable {
         self.id = id != nil ? id! : UUID().uuidString
         self.textLabel = ""
         self.color = .blue
-        self.isBuiltIn = false
+        self.sortPriority = 0
         self.incites = []
     }
 }

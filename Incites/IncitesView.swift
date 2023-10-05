@@ -10,11 +10,24 @@ import SwiftData
 
 struct IncitesView: View {
     @Environment(\.modelContext) private var modelContext
+    @Query(filter: #Predicate<Incite> { _ in false }, sort: \Incite.creationDate, order: .forward) var incites: [Incite]
     
-    var incites: [Incite]
     @Binding var selectedInciteId: UUID?
-    @Binding var selectedCategory: Category?
+    var selectedCategoryId: String?
 
+    init(selectedInciteId: Binding<UUID?>, selectedCategoryId: String?) {
+        self._selectedInciteId = selectedInciteId
+        self.selectedCategoryId = selectedCategoryId
+        
+        if let selectedCategoryId {
+            let predicate = #Predicate<Incite> { $0.categories.contains(where: { $0.id == selectedCategoryId }) }
+            self._incites  = Query(filter: predicate, sort: \Incite.creationDate)
+        } else {
+            let predicate = #Predicate<Incite> { _ in false }
+            self._incites  = Query(filter: predicate, sort: \Incite.creationDate)
+        }
+    }
+    
     var body: some View {
         List(selection: $selectedInciteId) {
             ForEach(incites, id: \.id) { incite in
@@ -39,14 +52,15 @@ struct IncitesView: View {
 
     private func addIncite() {
         withAnimation {
-            let fetchDescriptor = FetchDescriptor<Category>(predicate: #Predicate { $0.id == "ALL" })
-            let allCategory: Category = try! modelContext.fetch(fetchDescriptor).first!
+            let descriptor = FetchDescriptor<Category>(predicate:
+                #Predicate {
+                    $0.id == "ALL" || $0.id == (selectedCategoryId ?? "")
+                }
+            )
+            let categories: [Category] = try! modelContext.fetch(descriptor)
             
             let newIncite = Incite()
-            newIncite.categories.append(allCategory)
-            if let selectedCategory, selectedCategory !== allCategory {
-                newIncite.categories.append(selectedCategory)
-            }
+            newIncite.categories = categories
             
             modelContext.insert(newIncite)
             selectedInciteId = newIncite.id

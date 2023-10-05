@@ -11,26 +11,21 @@ import CoreSpotlight
 
 struct ContentView: View {
     @State var selectedInciteId: UUID?
-    @State var selectedCategory: Category?
-    @Query(sort: \Incite.creationDate, order: .forward) var incites: [Incite]
-    @Query(sort: [SortDescriptor(\Category.isBuiltInForSorting, order: .reverse), SortDescriptor(\Category.textLabel)]) 
-    var categories: [Category]
+    @State var selectedCategoryId: String?
     
     var body: some View {
         NavigationSplitView {
-            IncitesView(incites: incites, selectedInciteId: $selectedInciteId, selectedCategory: $selectedCategory)
+            CategoriesView(selectedCategoryId: $selectedCategoryId)
+        } content: {
+            IncitesView(selectedInciteId: $selectedInciteId, selectedCategoryId: selectedCategoryId)
         } detail: {
-            if let selectedInciteId, let incite = incites.first(where: { $0.id == selectedInciteId }) {
-                EditInciteView(incite: incite)
-            } else {
-                Text("Select a Category")
-            }
+            EditInciteView(inciteId: selectedInciteId)
         }
     }
     
 }
 
 #Preview {
-    ContentView()
-        .modelContainer(for: Incite.self, inMemory: true)
+    ContentView(selectedInciteId: nil, selectedCategoryId: nil)
+        .modelContainer(for: [Incite.self, Category.self, InciteImage.self], inMemory: true)
 }
