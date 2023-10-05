@@ -27,13 +27,15 @@ struct CategoriesView: View {
         .navigationTitle("Categories")
         .onAppear {
             if categories.isEmpty {
-                let all = Category(id: "ALL")
+                let all = Category(id: Category.allId)
                 all.sortPriority = 1
                 all.textLabel = "All Incites"
-                all.color = .blue
+                all.color = .black
                 modelContext.insert(all)
             }
-            selectedCategoryId = "ALL"
+            if selectedCategoryId == nil {
+                selectedCategoryId = Category.allId
+            }
         }
     }
 }

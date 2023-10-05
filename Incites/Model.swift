@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import SwiftUI
 
 enum Language: Codable {
     case english
@@ -19,10 +20,30 @@ enum Language: Codable {
 }
 
 enum InciteColor: Codable {
+    case black
     case red
     case green
     case blue
     case purple
+    
+    var swiftUIColor: Color {
+        switch self {
+        case .black:
+            return .black
+        case .blue:
+            return .blue
+        case .green:
+            return .green
+        case .purple:
+            return .purple
+        case .red:
+            return .red
+        }
+    }
+    
+    static var random: InciteColor {
+        [Self.blue, .green, .purple, .red].randomElement()!
+    }
 }
 
 struct Fact: Codable {
@@ -69,6 +90,8 @@ final class InciteImage: Identifiable {
 
 @Model
 final class Category: Identifiable {
+    static let allId = "ALL"
+    
     @Attribute(.unique) let id: String
     @Attribute(.spotlight) var textLabel: String
     var sortPriority: Int

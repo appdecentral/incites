@@ -32,19 +32,16 @@ struct IncitesView: View {
         List(selection: $selectedInciteId) {
             ForEach(incites, id: \.id) { incite in
                 NavigationLink(value: incite.id) {
-                    Text(incite.creationDate, format: Date.FormatStyle(date: .numeric, time: .standard))
+                    InciteRowView(incite: incite, selectedInciteId: selectedInciteId)
                 }
             }
             .onDelete(perform: deleteIncites)
         }
         .navigationTitle("Incites")
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                EditButton()
-            }
             ToolbarItem {
                 Button(action: addIncite) {
-                    Label("Add Item", systemImage: "plus")
+                    Label("Add Incite", systemImage: "plus")
                 }
             }
         }
@@ -76,6 +73,21 @@ struct IncitesView: View {
     }
 }
 
-//#Preview {
-//    IncitesView(selectedInciteId: .constant(nil))
-//}
+
+struct InciteRowView: View {
+    var incite: Incite
+    var selectedInciteId: UUID?
+    
+    var body: some View {
+        if incite.fact.text.isEmpty {
+            HStack {
+                Text("Newly created on:")
+                Text(incite.creationDate, format: Date.FormatStyle(date: .numeric))
+            }
+            .opacity(selectedInciteId == incite.id ? 1.0 : 0.5)
+        } else {
+            Text(incite.fact.text)
+                .lineLimit(1)
+        }
+    }
+}

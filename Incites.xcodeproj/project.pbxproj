@@ -10,6 +10,7 @@
 		0750000C2ACDA44B009DE2A0 /* EditInciteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0750000B2ACDA44B009DE2A0 /* EditInciteView.swift */; };
 		0750000E2ACDA4A6009DE2A0 /* IncitesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0750000D2ACDA4A6009DE2A0 /* IncitesView.swift */; };
 		075000182ACEAE33009DE2A0 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075000172ACEAE33009DE2A0 /* CategoriesView.swift */; };
+		0750001B2ACEED77009DE2A0 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 0750001A2ACEED77009DE2A0 /* WrappingHStack */; };
 		0781B0052ACC3EDD00D6E972 /* InsightsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0781B0042ACC3EDD00D6E972 /* InsightsApp.swift */; };
 		0781B0072ACC3EDD00D6E972 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0781B0062ACC3EDD00D6E972 /* ContentView.swift */; };
 		0781B00B2ACC3EDE00D6E972 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0781B00A2ACC3EDE00D6E972 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0750001B2ACEED77009DE2A0 /* WrappingHStack in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +101,9 @@
 			dependencies = (
 			);
 			name = Incites;
+			packageProductDependencies = (
+				0750001A2ACEED77009DE2A0 /* WrappingHStack */,
+			);
 			productName = Insights;
 			productReference = 0781B0012ACC3EDD00D6E972 /* Incites.app */;
 			productType = "com.apple.product-type.application";
@@ -127,6 +132,9 @@
 				Base,
 			);
 			mainGroup = 0781AFF82ACC3EDD00D6E972;
+			packageReferences = (
+				075000192ACEED77009DE2A0 /* XCRemoteSwiftPackageReference "WrappingHStack" */,
+			);
 			productRefGroup = 0781B0022ACC3EDD00D6E972 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -368,6 +376,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		075000192ACEED77009DE2A0 /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dkk/WrappingHStack.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.10;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0750001A2ACEED77009DE2A0 /* WrappingHStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 075000192ACEED77009DE2A0 /* XCRemoteSwiftPackageReference "WrappingHStack" */;
+			productName = WrappingHStack;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0781AFF92ACC3EDD00D6E972 /* Project object */;
 }
