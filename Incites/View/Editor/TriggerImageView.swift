@@ -16,24 +16,30 @@ struct TriggerImageView: View {
     private static let availableImageNames = ["Tree", "Car", "Earth"]
     
     var body: some View {
-        Text("Trigger Image")
-            .font(.title2.weight(.light))
-            .padding(.top, 30)
-        if case let .image(imageId) = incite.prompt {
+        let prompt = incite.prompt
+        if case let .image(imageId) = prompt {
+            Text("Trigger Image")
+                .font(.title2.weight(.light))
+                .padding(.top, 30)
             Image(data: incite.dataForImage(withId: imageId))!
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(minWidth: 100, maxHeight: 100)
+                .frame(minWidth: 160, maxHeight: 160)
             Text("Other Choices")
                 .font(.headline.weight(.light))
                 .padding(.top, 30)
+        } else {
+            Text("Choose Trigger Image")
+                .font(.title2.weight(.light))
+                .padding(.top, 30)
         }
         HStack {
+            Spacer()
             ForEach(Self.availableImageNames, id: \.self) { imageName in
                 Image(imageName)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(minWidth: 100, maxHeight: 100)
+                    .frame(minWidth: 60, maxHeight: 60)
                     .onTapGesture {
                         withAnimation {
                             let data = UIImage(named: imageName)!.pngData()!
@@ -44,6 +50,7 @@ struct TriggerImageView: View {
                         }
                     }
             }
+            Spacer()
         }
     }
 }

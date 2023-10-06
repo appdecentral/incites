@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-enum Language: Codable {
+enum Language: String, Codable {
     case english
     case spanish
     case german
@@ -18,7 +18,7 @@ enum Language: Codable {
     }
 }
 
-enum InciteColor: Codable {
+enum InciteColor: String, Codable {
     case black
     case red
     case green
