@@ -24,8 +24,3 @@ struct ContentView: View {
     }
     
 }
-
-#Preview {
-    ContentView(selectedInciteId: nil, selectedCategoryId: nil)
-        .modelContainer(for: [Incite.self, Category.self, InciteImage.self], inMemory: true)
-}

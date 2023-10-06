@@ -11,17 +11,30 @@
 		0750000E2ACDA4A6009DE2A0 /* IncitesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0750000D2ACDA4A6009DE2A0 /* IncitesView.swift */; };
 		075000182ACEAE33009DE2A0 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075000172ACEAE33009DE2A0 /* CategoriesView.swift */; };
 		0750001B2ACEED77009DE2A0 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 0750001A2ACEED77009DE2A0 /* WrappingHStack */; };
+		075000202ACFF50E009DE2A0 /* InciteTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0750001F2ACFF50E009DE2A0 /* InciteTextView.swift */; };
+		075000222ACFF543009DE2A0 /* CategoryGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075000212ACFF543009DE2A0 /* CategoryGridView.swift */; };
+		075000242ACFF583009DE2A0 /* TriggerImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075000232ACFF583009DE2A0 /* TriggerImageView.swift */; };
+		075000272ACFF6A5009DE2A0 /* CodableTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075000262ACFF6A5009DE2A0 /* CodableTypes.swift */; };
+		075000292ACFF6C9009DE2A0 /* Incite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075000282ACFF6C9009DE2A0 /* Incite.swift */; };
+		0750002B2ACFF701009DE2A0 /* InciteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0750002A2ACFF701009DE2A0 /* InciteImage.swift */; };
 		0781B0052ACC3EDD00D6E972 /* InsightsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0781B0042ACC3EDD00D6E972 /* InsightsApp.swift */; };
 		0781B0072ACC3EDD00D6E972 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0781B0062ACC3EDD00D6E972 /* ContentView.swift */; };
 		0781B00B2ACC3EDE00D6E972 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0781B00A2ACC3EDE00D6E972 /* Assets.xcassets */; };
 		0781B00E2ACC3EDE00D6E972 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0781B00D2ACC3EDE00D6E972 /* Preview Assets.xcassets */; };
-		0781B0172ACC3FD600D6E972 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0781B0162ACC3FD600D6E972 /* Model.swift */; };
+		0781B0172ACC3FD600D6E972 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0781B0162ACC3FD600D6E972 /* Category.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0750000B2ACDA44B009DE2A0 /* EditInciteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInciteView.swift; sourceTree = "<group>"; };
 		0750000D2ACDA4A6009DE2A0 /* IncitesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncitesView.swift; sourceTree = "<group>"; };
 		075000172ACEAE33009DE2A0 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
+		0750001C2ACFEAFB009DE2A0 /* Attributions.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Attributions.txt; sourceTree = "<group>"; };
+		0750001F2ACFF50E009DE2A0 /* InciteTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InciteTextView.swift; sourceTree = "<group>"; };
+		075000212ACFF543009DE2A0 /* CategoryGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryGridView.swift; sourceTree = "<group>"; };
+		075000232ACFF583009DE2A0 /* TriggerImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerImageView.swift; sourceTree = "<group>"; };
+		075000262ACFF6A5009DE2A0 /* CodableTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableTypes.swift; sourceTree = "<group>"; };
+		075000282ACFF6C9009DE2A0 /* Incite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Incite.swift; sourceTree = "<group>"; };
+		0750002A2ACFF701009DE2A0 /* InciteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InciteImage.swift; sourceTree = "<group>"; };
 		0781B0012ACC3EDD00D6E972 /* Incites.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Incites.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0781B0042ACC3EDD00D6E972 /* InsightsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightsApp.swift; sourceTree = "<group>"; };
 		0781B0062ACC3EDD00D6E972 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -29,7 +42,7 @@
 		0781B00D2ACC3EDE00D6E972 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0781B00F2ACC3EDE00D6E972 /* Incites.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Incites.entitlements; sourceTree = "<group>"; };
 		0781B0102ACC3EDE00D6E972 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0781B0162ACC3FD600D6E972 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		0781B0162ACC3FD600D6E972 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +57,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0750001D2ACFF4A6009DE2A0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0781B0162ACC3FD600D6E972 /* Category.swift */,
+				075000282ACFF6C9009DE2A0 /* Incite.swift */,
+				0750002A2ACFF701009DE2A0 /* InciteImage.swift */,
+				075000262ACFF6A5009DE2A0 /* CodableTypes.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0750001E2ACFF4B3009DE2A0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0781B0062ACC3EDD00D6E972 /* ContentView.swift */,
+				075000172ACEAE33009DE2A0 /* CategoriesView.swift */,
+				0750000D2ACDA4A6009DE2A0 /* IncitesView.swift */,
+				075000252ACFF5DB009DE2A0 /* Editor */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		075000252ACFF5DB009DE2A0 /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				0750000B2ACDA44B009DE2A0 /* EditInciteView.swift */,
+				0750001F2ACFF50E009DE2A0 /* InciteTextView.swift */,
+				075000212ACFF543009DE2A0 /* CategoryGridView.swift */,
+				075000232ACFF583009DE2A0 /* TriggerImageView.swift */,
+			);
+			path = Editor;
+			sourceTree = "<group>";
+		};
 		0781AFF82ACC3EDD00D6E972 = {
 			isa = PBXGroup;
 			children = (
@@ -63,15 +109,13 @@
 		0781B0032ACC3EDD00D6E972 /* Incites */ = {
 			isa = PBXGroup;
 			children = (
-				0781B0162ACC3FD600D6E972 /* Model.swift */,
 				0781B0042ACC3EDD00D6E972 /* InsightsApp.swift */,
-				0781B0062ACC3EDD00D6E972 /* ContentView.swift */,
-				075000172ACEAE33009DE2A0 /* CategoriesView.swift */,
-				0750000D2ACDA4A6009DE2A0 /* IncitesView.swift */,
-				0750000B2ACDA44B009DE2A0 /* EditInciteView.swift */,
+				0750001D2ACFF4A6009DE2A0 /* Model */,
+				0750001E2ACFF4B3009DE2A0 /* View */,
 				0781B00A2ACC3EDE00D6E972 /* Assets.xcassets */,
 				0781B00F2ACC3EDE00D6E972 /* Incites.entitlements */,
 				0781B0102ACC3EDE00D6E972 /* Info.plist */,
+				0750001C2ACFEAFB009DE2A0 /* Attributions.txt */,
 				0781B00C2ACC3EDE00D6E972 /* Preview Content */,
 			);
 			path = Incites;
@@ -161,12 +205,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				075000222ACFF543009DE2A0 /* CategoryGridView.swift in Sources */,
+				075000272ACFF6A5009DE2A0 /* CodableTypes.swift in Sources */,
 				0750000E2ACDA4A6009DE2A0 /* IncitesView.swift in Sources */,
+				075000242ACFF583009DE2A0 /* TriggerImageView.swift in Sources */,
+				075000202ACFF50E009DE2A0 /* InciteTextView.swift in Sources */,
 				0750000C2ACDA44B009DE2A0 /* EditInciteView.swift in Sources */,
 				075000182ACEAE33009DE2A0 /* CategoriesView.swift in Sources */,
 				0781B0072ACC3EDD00D6E972 /* ContentView.swift in Sources */,
-				0781B0172ACC3FD600D6E972 /* Model.swift in Sources */,
+				0781B0172ACC3FD600D6E972 /* Category.swift in Sources */,
+				075000292ACFF6C9009DE2A0 /* Incite.swift in Sources */,
 				0781B0052ACC3EDD00D6E972 /* InsightsApp.swift in Sources */,
+				0750002B2ACFF701009DE2A0 /* InciteImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

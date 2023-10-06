@@ -19,7 +19,7 @@ struct IncitesApp: App {
     }
     
     var modelContainer: ModelContainer = {
-        let schema = Schema([Incite.self])
+        let schema = Schema([Incite.self, InciteImage.self, Category.self])
         let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
         return try! ModelContainer(for: schema, configurations: [config])
     }()
