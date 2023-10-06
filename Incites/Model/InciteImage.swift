@@ -12,10 +12,10 @@ import SwiftData
 final class InciteImage: Identifiable {
     @Attribute(.unique) let id: UUID
     @Attribute(.externalStorage) let imageData: Data
-    @Relationship(inverse: \Incite.images) let incite: Incite
-    init(imageData: Data, incite: Incite) {
+    @Relationship(inverse: \Incite.images) var incite: Incite?
+    init(imageData: Data) {
         self.id = UUID()
         self.imageData = imageData
-        self.incite = incite
+        self.incite = nil
     }
 }

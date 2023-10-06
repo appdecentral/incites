@@ -37,9 +37,10 @@ struct TriggerImageView: View {
                     .onTapGesture {
                         withAnimation {
                             let data = UIImage(named: imageName)!.pngData()!
-                            let inciteImage = InciteImage(imageData: data, incite: incite)
-                            incite.prompt = .image(inciteImage.id)
+                            let inciteImage = InciteImage(imageData: data)
                             modelContext.insert(inciteImage)
+                            inciteImage.incite = incite
+                            incite.prompt = .image(inciteImage.id)
                         }
                     }
             }

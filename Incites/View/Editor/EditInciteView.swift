@@ -45,6 +45,7 @@ struct EditInciteView: View {
             return
         }
         let descriptor = FetchDescriptor<Incite>(predicate: #Predicate { $0.id == inciteId })
-        self.incite = try! modelContext.fetch(descriptor).first
+        let fetched = try! modelContext.fetch(descriptor).first
+        self.incite = fetched
     }
 }
