@@ -30,7 +30,7 @@ struct CategoryGridView: View {
                         if newValue {
                             incite.categories!.append(category)
                         } else {
-                            incite.categories = []
+                            incite.categories!.removeAll(where: { $0 === category })
                         }
                     }
                 )

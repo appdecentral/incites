@@ -56,15 +56,12 @@ struct IncitesView: View {
                     $0.id == "ALL" || $0.id == (selectedCategoryId ?? "")
                 }
             )
-            let categories: [Category] = try! modelContext.fetch(descriptor)
+            let fetchedCategories: [Category] = try! modelContext.fetch(descriptor)
             
             let newIncite = Incite()
-            newIncite.categories = []
+            newIncite.categories = fetchedCategories
             
             modelContext.insert(newIncite)
-            
-            newIncite.categories?.append(contentsOf: categories)
-            
             selectedInciteId = newIncite.id
         }
     }
