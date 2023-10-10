@@ -20,7 +20,9 @@ struct IncitesView: View {
         self.selectedCategoryId = selectedCategoryId
         
         if let selectedCategoryId {
-            let predicate = #Predicate<Incite> { $0.categories.contains(where: { $0.id == selectedCategoryId }) }
+            let predicate = #Predicate<Incite> { incite in
+                incite.categories!.contains(where: { $0.id == selectedCategoryId })
+            }
             self._incites  = Query(filter: predicate, sort: \Incite.creationDate)
         } else {
             let predicate = #Predicate<Incite> { _ in false }
@@ -57,9 +59,12 @@ struct IncitesView: View {
             let categories: [Category] = try! modelContext.fetch(descriptor)
             
             let newIncite = Incite()
-            newIncite.categories = categories
+            newIncite.categories = []
             
             modelContext.insert(newIncite)
+            
+            newIncite.categories?.append(contentsOf: categories)
+            
             selectedInciteId = newIncite.id
         }
     }

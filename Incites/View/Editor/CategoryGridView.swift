@@ -24,13 +24,13 @@ struct CategoryGridView: View {
             ForEach(categories) { category in
                 let selectionBinding = Binding<Bool>(
                     get: {
-                        incite.categories.contains(category)
+                        incite.categories!.contains(category)
                     },
                     set: { newValue in
                         if newValue {
-                            incite.categories.append(category)
+                            incite.categories!.append(category)
                         } else {
-                            incite.categories.removeAll(where: { $0 === category })
+                            incite.categories = []
                         }
                     }
                 )
@@ -53,10 +53,11 @@ struct CategoryGridView: View {
                 .textContentType(.URL)
                 .autocapitalization(.none)
             Button("Add Category") {
-                let new = Category(id: nil)
+                let new = Category()
+                new.id = UUID().uuidString
                 new.textLabel = newCategoryName
                 new.color = InciteColor.random
-                new.incites.append(incite)
+                new.incites = [incite]
                 modelContext.insert(new)
                 newCategoryName = ""
             }

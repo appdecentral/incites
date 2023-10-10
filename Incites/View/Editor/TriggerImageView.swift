@@ -25,7 +25,7 @@ struct TriggerImageView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(minWidth: 160, maxHeight: 160)
-            Text("Other Choices")
+            Text("Download Other...")
                 .font(.headline.weight(.light))
                 .padding(.top, 30)
         } else {
@@ -43,7 +43,8 @@ struct TriggerImageView: View {
                     .onTapGesture {
                         withAnimation {
                             let data = UIImage(named: imageName)!.pngData()!
-                            let inciteImage = InciteImage(imageData: data)
+                            let inciteImage = InciteImage()
+                            inciteImage.imageData = data
                             modelContext.insert(inciteImage)
                             inciteImage.incite = incite
                             incite.prompt = .image(inciteImage.id)
@@ -58,6 +59,7 @@ struct TriggerImageView: View {
 extension Incite {
     
     func dataForImage(withId imageId: UUID) -> Data {
+        guard let images else { return Data() }
         let inciteImage = images.first(where: { $0.id == imageId })!
         return inciteImage.imageData
     }

@@ -27,7 +27,8 @@ struct CategoriesView: View {
         .navigationTitle("Categories")
         .onAppear {
             if categories.isEmpty {
-                let all = Category(id: Category.allId)
+                let all = Category()
+                all.id = Category.allId
                 all.sortPriority = 1
                 all.textLabel = "All Incites"
                 all.color = .black

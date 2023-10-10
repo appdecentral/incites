@@ -10,12 +10,8 @@ import SwiftData
 
 @Model
 final class InciteImage: Identifiable {
-    @Attribute(.unique) let id: UUID
-    @Attribute(.externalStorage) let imageData: Data
+    let id: UUID = UUID.init()
+    @Attribute(.externalStorage) var imageData: Data = Data()
     @Relationship(inverse: \Incite.images) var incite: Incite?
-    init(imageData: Data) {
-        self.id = UUID()
-        self.imageData = imageData
-        self.incite = nil
-    }
+    init() {}
 }
