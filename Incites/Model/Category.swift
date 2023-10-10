@@ -15,6 +15,6 @@ final class Category: Identifiable {
     var textLabel: String = ""
     var sortPriority: Int = 0
     var color: InciteColor = InciteColor.blue
-    @Relationship(deleteRule: .nullify) var incites: [Incite]?
+    @Relationship(deleteRule: .nullify) var incites: [Incite]! = []
     init() {}
 }
