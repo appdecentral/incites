@@ -10,29 +10,29 @@ import SwiftData
 
 struct IncitesView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query(filter: #Predicate<Incite> { _ in false }, sort: \Incite.creationDate, order: .forward) var incites: [Incite]
+    @Query(sort: \Incite.creationDate, order: .forward) var incites: [Incite]
     
     @Binding var selectedInciteId: UUID?
     var selectedCategoryId: String?
+    
+    var filteredIncites: [Incite] {
+        if let selectedCategoryId {
+            return incites.filter { incite in
+                incite.categories?.contains { $0.id == selectedCategoryId } == true
+            }
+        } else {
+            return []
+        }
+    }
 
     init(selectedInciteId: Binding<UUID?>, selectedCategoryId: String?) {
         self._selectedInciteId = selectedInciteId
         self.selectedCategoryId = selectedCategoryId
-        
-        if let selectedCategoryId {
-            let predicate = #Predicate<Incite> { incite in
-                incite.categories!.contains(where: { $0.id == selectedCategoryId })
-            }
-            self._incites  = Query(filter: predicate, sort: \Incite.creationDate)
-        } else {
-            let predicate = #Predicate<Incite> { _ in false }
-            self._incites  = Query(filter: predicate, sort: \Incite.creationDate)
-        }
     }
     
     var body: some View {
         List(selection: $selectedInciteId) {
-            ForEach(incites, id: \.id) { incite in
+            ForEach(filteredIncites, id: \.id) { incite in
                 NavigationLink(value: incite.id) {
                     InciteRowView(incite: incite, selectedInciteId: selectedInciteId)
                 }
@@ -88,8 +88,17 @@ struct InciteRowView: View {
             }
             .opacity(selectedInciteId == incite.id ? 1.0 : 0.5)
         } else {
-            Text(incite.fact.text)
-                .lineLimit(1)
+            HStack {
+                Text(incite.fact.text)
+                    .lineLimit(1)
+                Spacer()
+                if case let .image(imageId) = incite.prompt {
+                    Image(data: incite.dataForImage(withId: imageId))!
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(minWidth: 30, maxHeight: 30)
+                }
+            }
         }
     }
 }
