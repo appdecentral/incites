@@ -11,7 +11,7 @@ import CoreSpotlight
 
 struct ContentView: View {
     @State var selectedInciteId: UUID?
-    @State var selectedCategoryId: String?
+    @State var selectedCategoryId: UUID?
     
     var body: some View {
         NavigationSplitView {

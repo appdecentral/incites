@@ -14,7 +14,7 @@ struct CategoriesView: View {
     @Query(sort: [SortDescriptor(\Category.sortPriority, order: .reverse), SortDescriptor(\Category.textLabel)])
     var categories: [Category]
     
-    @Binding var selectedCategoryId: String?
+    @Binding var selectedCategoryId: UUID?
     
     var body: some View {
         List(selection: $selectedCategoryId) {
@@ -28,14 +28,14 @@ struct CategoriesView: View {
         .onAppear {
             if categories.isEmpty {
                 let all = Category()
-                all.id = Category.allId
+                all.variety = .allIncites
                 all.sortPriority = 1
                 all.textLabel = "All Incites"
                 all.color = .black
                 modelContext.insert(all)
             }
             if selectedCategoryId == nil {
-                selectedCategoryId = Category.allId
+                selectedCategoryId = modelContext.allInsitesCategory.uniqueId
             }
         }
     }

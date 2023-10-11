@@ -13,19 +13,19 @@ struct IncitesView: View {
     @Query(sort: \Incite.creationDate, order: .forward) var incites: [Incite]
     
     @Binding var selectedInciteId: UUID?
-    var selectedCategoryId: String?
+    var selectedCategoryId: UUID?
     
     var filteredIncites: [Incite] {
         if let selectedCategoryId {
             return incites.filter { incite in
-                incite.categories?.contains { $0.id == selectedCategoryId } == true
+                incite.categories?.contains(where: { $0.uniqueId == selectedCategoryId }) == true
             }
         } else {
             return []
         }
     }
 
-    init(selectedInciteId: Binding<UUID?>, selectedCategoryId: String?) {
+    init(selectedInciteId: Binding<UUID?>, selectedCategoryId: UUID?) {
         self._selectedInciteId = selectedInciteId
         self.selectedCategoryId = selectedCategoryId
     }
@@ -51,11 +51,12 @@ struct IncitesView: View {
 
     private func addIncite() {
         withAnimation {
+            let allVariety = Category.Variety.allIncites.rawValue
+            let selectedId = selectedInciteId ?? .init()
             let descriptor = FetchDescriptor<Category>(predicate:
                 #Predicate {
-                    $0.id == "ALL" || $0.id == (selectedCategoryId ?? "")
-                }
-            )
+                    $0.varietyString == allVariety || $0.uniqueId == selectedId
+                })
             let fetchedCategories: [Category] = try! modelContext.fetch(descriptor)
             
             let newIncite = Incite()

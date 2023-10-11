@@ -35,7 +35,7 @@ struct CategoryGridView: View {
                     }
                 )
                 CategoryButton(selected: selectionBinding, label: category.textLabel, inciteColor: category.color)
-                    .disabled(category.id == Category.allId)
+                    .disabled(category.variety == .allIncites)
                     .padding(.trailing, 10)
             }
             Button {
@@ -54,7 +54,6 @@ struct CategoryGridView: View {
                 .autocapitalization(.none)
             Button("Add Category") {
                 let new = Category()
-                new.id = UUID().uuidString
                 new.textLabel = newCategoryName
                 new.color = InciteColor.random
                 new.incites = [incite]
