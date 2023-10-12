@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 
-typealias CurrentSchema = IncitesSchema3
+typealias CurrentVersionedSchema = IncitesSchema3
 
 enum IncitesMigrationPlan: SchemaMigrationPlan {
     static var schemas: [any VersionedSchema.Type] {

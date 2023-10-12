@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 
-typealias Category = CurrentSchema.Category
+typealias Category = CurrentVersionedSchema.Category
 
 extension ModelContext {
     var allInsitesCategory: Category {

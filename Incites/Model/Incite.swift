@@ -8,4 +8,4 @@
 import Foundation
 import SwiftData
 
-typealias Incite = CurrentSchema.Incite
+typealias Incite = CurrentVersionedSchema.Incite

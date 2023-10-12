@@ -20,7 +20,7 @@ struct IncitesApp: App {
     
     var modelContainer: ModelContainer = {
         do {
-            let schema = Schema([Incite.self], version: .init(1, 1, 0))
+            let schema = Schema(CurrentVersionedSchema.models, version: CurrentVersionedSchema.versionIdentifier)
             let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
             return try ModelContainer(for: schema, migrationPlan: IncitesMigrationPlan.self, configurations: [config])
         } catch {

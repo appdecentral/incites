@@ -8,4 +8,4 @@
 import Foundation
 import SwiftData
 
-typealias InciteImage = CurrentSchema.InciteImage
+typealias InciteImage = CurrentVersionedSchema.InciteImage
