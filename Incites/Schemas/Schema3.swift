@@ -22,7 +22,7 @@ enum IncitesSchema3: VersionedSchema {
             case allIncites
         }
         
-        var id: String = ""
+        @Attribute(originalName: "id") var oldId: String = ""
         
         var uniqueId: UUID = UUID.init()
         

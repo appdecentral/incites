@@ -25,9 +25,9 @@ enum IncitesMigrationPlan: SchemaMigrationPlan {
         didMigrate: { context in
             let categories = try context.fetch(FetchDescriptor<IncitesSchema3.Category>())
             for category in categories {
-                if category.id == "ALL" {
+                if category.oldId == "ALL" {
                     category.varietyString = Category.Variety.allIncites.rawValue
-                } else if let uuid = UUID(uuidString: category.id) {
+                } else if let uuid = UUID(uuidString: category.oldId) {
                     category.uniqueId = uuid
                 }
             }
