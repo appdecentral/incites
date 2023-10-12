@@ -3,9 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>UIBackgroundModes</key>
-	<array>
-		<string>fetch</string>
-		<string>remote-notification</string>
-	</array>
+	<array/>
 </dict>
 </plist>

@@ -15,23 +15,12 @@ struct IncitesApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(modelContainer ?? inMemoryContainer)
+        .modelContainer(modelContainer)
     }
     
-    var modelContainer: ModelContainer? = {
-        do {
-            let schema = Schema(CurrentVersionedSchema.models, version: CurrentVersionedSchema.versionIdentifier)
-            let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-            return try ModelContainer(for: schema, migrationPlan: IncitesMigrationPlan.self, configurations: [config])
-        } catch {
-            print("Failed to create model with error: \(error)")
-            return nil
-        }
-    }()
-    
-    var inMemoryContainer: ModelContainer = {
+    var modelContainer: ModelContainer = {
         let schema = Schema(CurrentVersionedSchema.models, version: CurrentVersionedSchema.versionIdentifier)
-        let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+        let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
         return try! ModelContainer(for: schema, migrationPlan: IncitesMigrationPlan.self, configurations: [config])
     }()
     
