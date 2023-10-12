@@ -11,8 +11,8 @@ import SwiftData
 typealias Category = CurrentVersionedSchema.Category
 
 extension ModelContext {
-    var allInsitesCategory: Category {
-        allInsitesCategories.first!
+    var allInsitesCategory: Category? {
+        allInsitesCategories.first
     }
     
     private var allInsitesCategories: [Category] {

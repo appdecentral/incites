@@ -35,7 +35,7 @@ struct CategoriesView: View {
                 modelContext.insert(all)
             }
             if selectedCategoryId == nil {
-                selectedCategoryId = modelContext.allInsitesCategory.uniqueId
+                selectedCategoryId = modelContext.allInsitesCategory?.uniqueId
             }
         }
     }
