@@ -22,8 +22,7 @@ enum IncitesSchema3: VersionedSchema {
             case allIncites
         }
         
-        @Attribute(originalName: "id") var oldId: String = ""
-        
+        var id: String = "" // Deprecated
         var uniqueId: UUID = UUID.init()
         
         var varietyString: String = Variety.userCreated.rawValue

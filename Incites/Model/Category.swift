@@ -21,6 +21,18 @@ extension ModelContext {
         return try! fetch(descriptor)
     }
     
+    func migrateCategoriesToUniqueId() {
+        let categories = try! fetch(FetchDescriptor<Category>())
+        for category in categories {
+            if category.id == "ALL" {
+                category.varietyString = Category.Variety.allIncites.rawValue
+            } else if let uuid = UUID(uuidString: category.id) {
+                category.uniqueId = uuid
+            }
+            category.id = ""
+        }
+    }
+    
     func deduplicateCategories() {
         // Merge the "All Incites" categories, so there is only one.
         // We sort to make sure that each device keeps the same object

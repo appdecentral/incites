@@ -21,7 +21,8 @@ struct IncitesApp: App {
     var modelContainer: ModelContainer = {
         let schema = Schema(CurrentVersionedSchema.models, version: CurrentVersionedSchema.versionIdentifier)
         let config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-        return try! ModelContainer(for: schema, migrationPlan: IncitesMigrationPlan.self, configurations: [config])
+        let container = try! ModelContainer(for: schema, migrationPlan: IncitesMigrationPlan.self, configurations: [config])
+        return container
     }()
     
 }

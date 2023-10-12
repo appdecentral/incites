@@ -26,6 +26,9 @@ struct CategoriesView: View {
         }
         .navigationTitle("Categories")
         .onAppear {
+            modelContext.migrateCategoriesToUniqueId()
+            modelContext.deduplicateCategories()
+            
             if categories.isEmpty {
                 let all = Category()
                 all.variety = .allIncites
@@ -37,6 +40,9 @@ struct CategoriesView: View {
             if selectedCategoryId == nil {
                 selectedCategoryId = modelContext.allInsitesCategory?.uniqueId
             }
+        }
+        .onChange(of: categories) {
+            modelContext.deduplicateCategories()
         }
     }
 }
