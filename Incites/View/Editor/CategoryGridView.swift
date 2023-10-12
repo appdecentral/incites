@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftData
-import WrappingHStack
 
 struct CategoryGridView: View {
     @Environment(\.modelContext) private var modelContext
@@ -20,8 +19,8 @@ struct CategoryGridView: View {
     @State var newCategoryName: String = ""
 
     var body: some View {
-        WrappingHStack {
-            ForEach(categories) { category in
+        HStack {
+            ForEach(categories, id: \.uniqueId) { category in
                 let selectionBinding = Binding<Bool>(
                     get: {
                         incite.categories!.contains(category)
@@ -36,8 +35,9 @@ struct CategoryGridView: View {
                 )
                 CategoryButton(selected: selectionBinding, label: category.textLabel, inciteColor: category.color)
                     .disabled(category.variety == .allIncites)
-                    .padding(.trailing, 10)
+                    .padding(.trailing, 4)
             }
+            
             Button {
                 addingCategory = true
             } label: {
@@ -47,26 +47,21 @@ struct CategoryGridView: View {
                     .frame(width: 25)
             }
         }
-        .alert("Add Category", isPresented: $addingCategory) {
+        .alert("New Category", isPresented: $addingCategory) {
             TextField("Enter category name", text: $newCategoryName)
-                .keyboardType(.URL)
-                .textContentType(.URL)
-                .autocapitalization(.none)
-            Button("Add Category") {
-                let new = Category()
-                new.textLabel = newCategoryName
-                new.color = InciteColor.random
-                new.incites = [incite]
-                modelContext.insert(new)
-                newCategoryName = ""
-            }
-            .disabled(newCategoryName.isEmpty)
-            Button("Cancel", role: .cancel) {
-                newCategoryName = ""
-            }
+            Button("Add Category", action: addCategory)
         } message: {
             Text("Categories are used to group your incites.")
         }
+    }
+    
+    private func addCategory() {
+        let new = Category()
+        new.textLabel = newCategoryName
+        new.color = InciteColor.random
+        new.incites = [incite]
+        modelContext.insert(new)
+        newCategoryName = ""
     }
 }
 

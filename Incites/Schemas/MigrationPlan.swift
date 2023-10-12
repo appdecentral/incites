@@ -8,6 +8,8 @@
 import Foundation
 import SwiftData
 
+typealias CurrentSchema = IncitesSchema3
+
 enum IncitesMigrationPlan: SchemaMigrationPlan {
     static var schemas: [any VersionedSchema.Type] {
         [IncitesSchema1.self, IncitesSchema2.self, IncitesSchema3.self]
@@ -25,8 +27,8 @@ enum IncitesMigrationPlan: SchemaMigrationPlan {
             for category in categories {
                 if category.id == "ALL" {
                     category.varietyString = Category.Variety.allIncites.rawValue
-                } else {
-                    category.uniqueId = UUID(uuidString: category.id)!
+                } else if let uuid = UUID(uuidString: category.id) {
+                    category.uniqueId = uuid
                 }
             }
             try! context.save()

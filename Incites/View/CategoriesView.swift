@@ -18,8 +18,8 @@ struct CategoriesView: View {
     
     var body: some View {
         List(selection: $selectedCategoryId) {
-            ForEach(categories, id: \.id) { category in
-                NavigationLink(value: category.id) {
+            ForEach(categories, id: \.uniqueId) { category in
+                NavigationLink(value: category.uniqueId) {
                     Text(category.textLabel)
                 }
             }

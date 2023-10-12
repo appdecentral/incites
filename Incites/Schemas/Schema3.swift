@@ -23,8 +23,19 @@ enum IncitesSchema3: VersionedSchema {
         }
         
         var id: String = ""
+        
         var uniqueId: UUID = UUID.init()
+        
         var varietyString: String = Variety.userCreated.rawValue
+        var variety: Variety {
+            get {
+                Variety(rawValue: varietyString)!
+            }
+            set {
+                varietyString = newValue.rawValue
+            }
+        }
+        
         var textLabel: String = ""
         var sortPriority: Int = 0
         var color: InciteColor = InciteColor.blue
@@ -48,7 +59,7 @@ enum IncitesSchema3: VersionedSchema {
     @Model
     final class InciteImage: Identifiable {
         let id: UUID = UUID.init()
-        @Attribute(.externalStorage) let imageData: Data = Data()
+        @Attribute(.externalStorage) var imageData: Data = Data()
         @Relationship(inverse: \Incite.images) var incite: Incite?
         init() {}
     }
