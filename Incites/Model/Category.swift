@@ -37,7 +37,7 @@ extension ModelContext {
         // Merge the "All Incites" categories, so there is only one.
         // We sort to make sure that each device keeps the same object
         let alls: [Category] = allInsitesCategories.sorted(by: { $0.uniqueId < $1.uniqueId })
-        let toKeep = alls.first!
+        guard let toKeep = alls.first else { return }
         let others = alls.dropFirst()
         for other in others {
             toKeep.incites.append(contentsOf: other.incites)
